@@ -2,33 +2,36 @@ FROM node:20-alpine as development
 
 WORKDIR /var/app
 
-COPY --chown=node:node . .
+COPY . .
 
-COPY --chown=node:node package*.json ./
+COPY ./src/prisma ./src/prisma
+COPY package*.json ./
 
 RUN npm ci
-
-USER node
+RUN chown -R /var/app/node_modules/.prisma/ node:node
+RUN npx prisma migrate reset
 
 FROM node:20-alpine as builder
-USER node
 ENV NODE_ENV production
 
 WORKDIR /var/app
 
-COPY --chown=node:node package*.json ./
-COPY --chown=node:node --from=development /var/app/node_modules ./node_modules
-COPY --chown=node:node . .
+COPY package*.json ./
+COPY --from=development /var/app/node_modules ./node_modules
+COPY . .
+
 
 RUN npm run build
 
 RUN npm ci
+RUN chown -R /var/app/node_modules/.prisma/ node:node
+RUN sudo npm run prisma:seed
 
 FROM node:20-alpine as production
 
 # Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=build /var/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /var/app/dist ./dist
+COPY --from=build /var/app/node_modules ./node_modules
+COPY --from=build /var/app/dist ./dist
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]

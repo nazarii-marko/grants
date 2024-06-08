@@ -1,16 +1,16 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { FeedbackService } from './feedback.service';
-import { CreateFeedbackInput } from './dto/create-feedback.input';
+import { SubmitFeedbackInput } from './dto/submit-feedback.input';
 
 @Resolver('Feedback')
 export class FeedbackResolver {
   constructor(private readonly feedbackService: FeedbackService) {}
 
-  @Mutation('createFeedback')
+  @Mutation('submitFeedback')
   create(
-    @Args('createFeedbackInput') createFeedbackInput: CreateFeedbackInput,
+    @Args('submitFeedbackInput') submitFeedbackInput: SubmitFeedbackInput,
   ) {
-    return this.feedbackService.create(createFeedbackInput);
+    return this.feedbackService.submitFeedback(submitFeedbackInput);
   }
 
   @Query('feedbacks')

@@ -1,0 +1,47 @@
+services:
+  postgres:
+    container_name: 'grants-db'
+    image: postgres:14-alpine
+    restart: always
+    env_file:
+      - server/.env
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_volume:/var/lib/postgresql/data
+  api:
+    container_name: 'grants-api'
+    depends_on:
+      - postgres
+    env_file:
+      - server/.env
+    build:
+      dockerfile: Dockerfile
+      context: server
+      target: "development"
+    volumes:
+      - ./server:/var/app
+      - /var/app/node_modules
+    command: "npm run start:dev"
+    ports:
+      - 3000:3000
+  web:
+    container_name: 'grants-fe'
+    depends_on:
+      - api
+    build:
+      dockerfile: Dockerfile
+      context: client
+      target: "development"
+
+    command: "npm run dev"
+    volumes:
+      - ./client:/var/app
+      - /var/app/node_modules
+    env_file:
+      - client/.env
+    ports:
+      - 3001:3001
+volumes:
+  pg_volume:
+

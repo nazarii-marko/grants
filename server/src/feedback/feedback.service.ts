@@ -1,24 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFeedbackInput } from './dto/create-feedback.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { Grant } from '../grant/entities/grant.entity';
+import { SubmitFeedbackInput } from './dto/submit-feedback.input';
 
 @Injectable()
 export class FeedbackService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createFeedbackInput: CreateFeedbackInput): Promise<Grant> {
+  async submitFeedback(
+    submitFeedbackInput: SubmitFeedbackInput,
+  ): Promise<Grant> {
     return this.prisma.grant.update({
-      where: { id: createFeedbackInput.grantId },
+      where: { id: submitFeedbackInput.grantId },
       data: {
-        status: createFeedbackInput.positive ? 'ACCEPTED' : 'REJECTED',
+        status: submitFeedbackInput.positive ? 'ACCEPTED' : 'REJECTED',
         matchDate: new Date(),
         feedbacks: {
           create: {
-            body: createFeedbackInput.feedbackBody,
+            body: submitFeedbackInput.feedbackBody,
           },
         },
-        ...(!createFeedbackInput.positive && { isActive: false }),
+        ...(!submitFeedbackInput.positive && { isActive: false }),
       },
     });
   }

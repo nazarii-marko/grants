@@ -21,6 +21,7 @@ type Location {
 }
 
 enum GrantStatus {
+  NEW
   APPLIED
   REJECTED
   ACCEPTED
@@ -38,8 +39,13 @@ enum AreaOfFunding {
   HELLO
 }
 
+type GrantsWithPagination {
+  grants: [Grant]!
+  totalCount: Int
+}
+
 type Query {
-  grants(pagination: PaginationInput!): [Grant]!
+  grants(pagination: PaginationInput!): GrantsWithPagination!
   grant(id: String!): Grant
   newMatches: [Grant]!
 }

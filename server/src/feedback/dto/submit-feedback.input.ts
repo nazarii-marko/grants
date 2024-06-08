@@ -1,4 +1,4 @@
-export class CreateFeedbackInput {
+export class SubmitFeedbackInput {
   grantId: string;
   feedbackBody: string;
   positive: boolean;

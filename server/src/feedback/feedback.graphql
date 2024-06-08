@@ -6,7 +6,7 @@ type Feedback {
   createdAt: Date!
 }
 
-input CreateFeedbackInput {
+input SubmitFeedbackInput {
   grantId: String!
   feedbackBody: String!
   positive: Boolean!
@@ -18,5 +18,5 @@ type Query {
 }
 
 type Mutation {
-  createFeedback(createFeedbackInput: CreateFeedbackInput!): Feedback!
+  submitFeedback(submitFeedbackInput: SubmitFeedbackInput!): Grant!
 }
