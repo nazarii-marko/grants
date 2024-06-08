@@ -39,7 +39,7 @@ enum AreaOfFunding {
 }
 
 type Query {
-  grants: [Grant]!
+  grants(pagination: PaginationInput!): [Grant]!
   grant(id: String!): Grant
   newMatches: [Grant]!
 }
