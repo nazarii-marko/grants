@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Grant {
+  id             String          @id @default(uuid())
+  logoUrl        String?
+  name           String
+  foundationName String
+  averageAmount  Int
+  status         GrantStatus     @default(NEW)
+  location       Location        @relation(fields: [locationId], references: [id])
+  locationId     String
+  areaOfFunding  AreaOfFunding[]
+  deadline       DateTime
+  matchDate      DateTime?
+  isActive       Boolean         @default(true)
+  feedbacks      Feedback[]
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  grantId   String
+  grant     Grant    @relation(fields: [grantId], references: [id])
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model Location {
+  id      String  @id @default(uuid())
+  country String
+  state   String?
+  city    String
+  grant   Grant[]
+}
+
+enum AreaOfFunding {
+  CULTURE_FOOD
+  PUBLIC_HEALTH_WOMEN
+  ENVIRONMENT_ART
+  VETERANS_ISSUES
+  MEDICAL_ASSISTANCE
+  RELIGIOUS_AND_SPIRITUAL_ENDEAVORS
+  SOMETHING_ELSE
+  AND_ANOTHER_ONE
+  HELLO
+}
+
+enum GrantStatus {
+  NEW
+  APPLIED
+  REJECTED
+  ACCEPTED
+}

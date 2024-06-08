@@ -1,0 +1,46 @@
+type Grant {
+  id: String!
+  logoUrl: String
+  name: String!
+  foundationName: String!
+  averageAmount: String!
+  status: GrantStatus!
+  location: Location
+  locationId: String!
+  areaOfFunding: [AreaOfFunding]
+  deadline: Date!
+  matchDate: Date
+  feedbacks: [Feedback]
+}
+
+type Location {
+  id: String!
+  country: String!
+  state: String
+  city: String!
+}
+
+enum GrantStatus {
+  APPLIED
+  REJECTED
+  ACCEPTED
+}
+
+enum AreaOfFunding {
+  CULTURE_FOOD
+  PUBLIC_HEALTH_WOMEN
+  ENVIRONMENT_ART
+  VETERANS_ISSUES
+  MEDICAL_ASSISTANCE
+  RELIGIOUS_AND_SPIRITUAL_ENDEAVORS
+  SOMETHING_ELSE
+  AND_ANOTHER_ONE
+  HELLO
+}
+
+type Query {
+  grants: [Grant]!
+  grant(id: String!): Grant
+  newMatches: [Grant]!
+}
+

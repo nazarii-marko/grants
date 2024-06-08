@@ -1,0 +1,22 @@
+type Feedback {
+  id: String!
+  grantId: String!
+  grant: Grant
+  body: String!
+  createdAt: Date!
+}
+
+input CreateFeedbackInput {
+  grantId: String!
+  feedbackBody: String!
+  positive: Boolean!
+}
+
+type Query {
+  feedbacks(grantId: String!): [Feedback]!
+  feedback(id: String!): Feedback
+}
+
+type Mutation {
+  createFeedback(createFeedbackInput: CreateFeedbackInput!): Feedback!
+}

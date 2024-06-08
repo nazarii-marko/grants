@@ -1,0 +1,17 @@
+scalar Date
+
+input PaginationInput {
+    take: Int!
+    skip: Int!
+    orderBy: OrderByInput
+}
+
+input OrderByInput {
+    field: String!
+    direction: OrderDirection
+}
+
+enum OrderDirection {
+    asc
+    desc
+}
