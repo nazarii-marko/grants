@@ -21,19 +21,12 @@ export class GrantService {
     });
   }
 
-  async newMatches(pagination: Pagination) {
+  async newMatches() {
     return this.prisma.grant.findMany({
       where: {
         matchDate: null,
         isActive: true,
       },
-      take: pagination.take,
-      skip: pagination.skip,
-      ...(pagination?.orderBy && {
-        orderBy: {
-          [pagination.orderBy.field]: pagination?.orderBy.direction || 'desc',
-        },
-      }),
     });
   }
 

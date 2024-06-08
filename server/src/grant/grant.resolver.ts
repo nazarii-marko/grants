@@ -10,6 +10,11 @@ export class GrantResolver {
     return this.grantService.findAll(pagination);
   }
 
+  @Query('newMatches')
+  newMatches() {
+    return this.grantService.newMatches();
+  }
+
   @Query('grant')
   findOne(@Args('id') id: string) {
     return this.grantService.findOne(id);
