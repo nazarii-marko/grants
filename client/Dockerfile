@@ -2,13 +2,9 @@ FROM node:20-alpine as development
 
 WORKDIR /var/app
 
-COPY --chown=node:node . .
-
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 
 RUN npm ci
-
-USER node
 
 FROM node:20-alpine as builder
 USER node
@@ -16,20 +12,18 @@ ENV NODE_ENV production
 
 WORKDIR /var/app
 
-COPY --chown=node:node package*.json ./
-COPY --chown=node:node --from=development /var/app/node_modules ./node_modules
-COPY --chown=node:node . .
+COPY package*.json ./
+COPY --from=development /var/app/node_modules ./node_modules
+COPY . .
 
 RUN npm run build
-
-RUN npm ci
 
 FROM node:20-alpine as production
 
 # Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=build /var/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /var/app/dist /var/www/html
+COPY --from=build /var/app/node_modules ./node_modules
+COPY --from=build /var/app/dist /var/www/html
 
 
 EXPOSE 3001
-CMD ["npm", "dev"]
+CMD ["npm", "run", "dev"]

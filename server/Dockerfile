@@ -19,7 +19,7 @@ COPY . .
 
 
 RUN npm run build
-RUN echo "hello" && npx prisma generate
+RUN npx prisma generate
 RUN sudo npm run prisma:seed
 
 FROM node:20-alpine as production

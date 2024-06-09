@@ -16,7 +16,7 @@ export default function MatchCard({ cardData }: { cardData: Grant }) {
   const [positiveFeedback, setPositiveFeedback] = useState(true);
   const logo = useRef(defaultLogo(cardData.logoUrl, cardData.name));
 
-  const [submitFeedback, { data }] = useMutation(SUBMIT_FEEDBACK, {
+  const [submitFeedback] = useMutation(SUBMIT_FEEDBACK, {
     fetchPolicy: 'network-only',
     refetchQueries: [NEW_MATCHES, GRANTS],
     variables: {
@@ -27,7 +27,6 @@ export default function MatchCard({ cardData }: { cardData: Grant }) {
       },
     },
   });
-  console.log(data);
   const handleMouseLeave = () => {
     setIsMouseOver(false);
   };
