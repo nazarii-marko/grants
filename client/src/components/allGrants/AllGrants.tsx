@@ -121,7 +121,7 @@ export default function AllGrants() {
 
           <button
             onClick={() => handlePagination(true)}
-            disabled={data.grants?.totalCount >= (page - 1) * pageSize}
+            disabled={data.grants?.totalCount < page * pageSize}
             className={`flex disabled:bg-gray-300 disabled:cursor-not-allowed items-center justify-center px-3 h-8 ms-3 text-sm text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 active:bg-gray-200 active:text-gray-800`}
           >
             Next

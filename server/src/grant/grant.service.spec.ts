@@ -28,6 +28,7 @@ describe('GrantService', () => {
     }).compile();
 
     service = module.get<GrantService>(GrantService);
+    prismaMock.grant.findMany.mockClear();
   });
 
   it('should be defined', () => {

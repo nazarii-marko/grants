@@ -4,12 +4,9 @@ WORKDIR /var/app
 
 COPY . .
 
-COPY ./src/prisma ./src/prisma
 COPY package*.json ./
 
 RUN npm ci
-RUN chown -R /var/app/node_modules/.prisma/ node:node
-RUN npx prisma migrate reset
 
 FROM node:20-alpine as builder
 ENV NODE_ENV production
@@ -22,9 +19,7 @@ COPY . .
 
 
 RUN npm run build
-
-RUN npm ci
-RUN chown -R /var/app/node_modules/.prisma/ node:node
+RUN echo "hello" && npx prisma generate
 RUN sudo npm run prisma:seed
 
 FROM node:20-alpine as production

@@ -14,16 +14,18 @@ export class GrantService {
         status: { not: GrantStatus.NEW },
         matchDate: { not: null },
       },
-      take: pagination.take,
-      skip: pagination.skip,
-      ...(pagination?.orderBy && {
-        orderBy: {
-          [pagination.orderBy.field]: pagination?.orderBy.direction || 'desc',
-        },
-      }),
     };
     const res = await this.prisma.$transaction([
-      this.prisma.grant.findMany(queryArgs),
+      this.prisma.grant.findMany({
+        ...queryArgs,
+        take: pagination.take,
+        skip: pagination.skip,
+        ...(pagination?.orderBy && {
+          orderBy: {
+            [pagination.orderBy.field]: pagination?.orderBy.direction || 'desc',
+          },
+        }),
+      }),
       this.prisma.grant.count(queryArgs),
     ]);
     return { grants: res[0], totalCount: res[1] };

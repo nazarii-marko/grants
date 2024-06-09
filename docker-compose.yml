@@ -4,7 +4,7 @@ services:
     image: postgres:14-alpine
     restart: always
     env_file:
-      - server/.env
+      - server/local.env
     ports:
       - '5432:5432'
     volumes:
@@ -14,7 +14,7 @@ services:
     depends_on:
       - postgres
     env_file:
-      - server/.env
+      - server/local.env
     build:
       dockerfile: Dockerfile
       context: server
@@ -39,7 +39,7 @@ services:
       - ./client:/var/app
       - /var/app/node_modules
     env_file:
-      - client/.env
+      - client/local.env
     ports:
       - 3001:3001
 volumes:

@@ -1,15 +1,9 @@
 // import { Grant } from '../src/grant/entities/grant.entity';
 
-import { Grant, Location, PrismaClient } from '@prisma/client';
+import { Location, PrismaClient } from '@prisma/client';
 
 (async () => {
   const prisma = new PrismaClient();
-
-  // id      String  @id @default(uuid())
-  // country String
-  // state   String?
-  //   city    String
-  // grant   Grant[]
 
   const location: Location = await prisma.location.create({
     data: {
@@ -157,6 +151,142 @@ import { Grant, Location, PrismaClient } from '@prisma/client';
         ],
         status: 'APPLIED',
         deadline: new Date('2025-02-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
+        matchDate: new Date(),
+      },
+      {
+        logoUrl: '/vite.svg',
+        name: 'Robinson Foundation Grant',
+        foundationName: 'Robinson Foundation',
+        averageAmount: 25000,
+        locationId: location.id,
+        areaOfFunding: [
+          'PUBLIC_HEALTH_WOMEN',
+          'CULTURE_FOOD',
+          'MEDICAL_ASSISTANCE',
+          'VETERANS_ISSUES',
+          'AND_ANOTHER_ONE',
+        ],
+        status: 'APPLIED',
+        deadline: new Date('2025-01-01'),
         matchDate: new Date(),
       },
       {
