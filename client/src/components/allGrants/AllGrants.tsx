@@ -103,7 +103,7 @@ export default function AllGrants() {
                 {formatDate(grant.deadline)}
               </td>
               <td className="px-4 py-5 font-medium text-gray-500 whitespace-nowrap border border-gray-200">
-                {formatDate(grant.deadline, true)}
+                {grant.matchDate ? formatDate(grant.matchDate, true) : ''}
               </td>
             </tr>
           ))}
